@@ -1,0 +1,13 @@
+{
+	"fps": 30,
+	"width": 540,
+	"height": 960,
+	"outputVolume": 1,
+	"keepSourceAudio": false,
+	"audioTracks": [
+		{
+			"path": "resource/current.mp3",
+			"mixVolume": 1
+		}
+	]
+}

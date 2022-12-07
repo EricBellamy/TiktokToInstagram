@@ -1,0 +1,8 @@
+.DS_Store
+node_modules
+package-lock.json
+
+input
+output
+resource/current.mp3
+resource/screenshot.jpg
