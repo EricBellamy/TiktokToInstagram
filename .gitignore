@@ -4,5 +4,7 @@ package-lock.json
 
 input
 output
+tests
+tests.json
 resource/current.mp3
-resource/screenshot.jpg
+resource/frame.jpg
