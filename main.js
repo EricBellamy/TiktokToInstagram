@@ -18,7 +18,7 @@ const TIKTOK_SPLASH_RGB = [14, 14, 26];
 const EDIT_SPEC = require('./resource/editspec.json');
 
 function updateEditSpec(SONG_ID, duration) {
-	if(TIKTOK_AUDIO_DESYNC === TIKTOK_AVAILABLE_DESYNCS.SPLASH) duration -= TIKTOK_WATERMARK_DURATION;
+	if (TIKTOK_AUDIO_DESYNC === TIKTOK_AVAILABLE_DESYNCS.SPLASH) duration -= TIKTOK_WATERMARK_DURATION;
 
 	EDIT_SPEC.clips[0].layers[0].path = `./input/${SONG_ID}.mp4`;
 	EDIT_SPEC.clips[0].layers[0].cutTo = duration;
@@ -102,11 +102,19 @@ async function run() {
 	fs.ensureDirSync('output');
 
 	const files = fs.readdirSync('input');
-	for(const file of files){
-		const SONG_ID = file.split('.mp4')[0];
-		console.log(`PROCESSING: ${SONG_ID}`);
-		await processSong(SONG_ID);
-		cleanup();
+	for (const file of files) {
+		if (file.indexOf(".mp4") != -1) {
+			const SONG_ID = file.split('.mp4')[0];
+
+			// Process song if output file doesn't exist
+			try {
+				const existingStats = fs.statSync(`output/${SONG_ID}.mp4`);
+			} catch (err) {
+				console.log(`PROCESSING: ${SONG_ID}`);
+				await processSong(SONG_ID);
+				cleanup();
+			}
+		}
 	}
 
 	console.log("DONE!");
